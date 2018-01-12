@@ -1,0 +1,15 @@
+- name: download stolon
+  get_url: url="https://github.com/sorintlab/stolon/releases/download/v{{ stolon_version }}/stolon-v{{ stolon_version }}-linux-amd64.tar.gz" dest=/root/stolon-v{{ stolon_version }}-linux-amd64.tar.gz
+
+- name: unpack stolon
+  unarchive: copy=no src="/root/stolon-v{{ stolon_version }}-linux-amd64.tar.gz" dest={{ stolon_unarchive_prefix }}
+
+- name: create a user
+  user: name={{ stolon_proxy_user }}
+
+- name: put systemd unit file to its destination
+  template: src=stolon-proxy.service dest=/etc/systemd/system/stolon-proxy.service owner=root group=root mode=0644
+  notify: systemctl daemon-reload
+
+- name: enable stolon-proxy service
+  service: name=stolon-proxy enabled=yes state=started
