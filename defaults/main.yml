@@ -1,7 +1,8 @@
-stolon_version: 0.7.0
+stolon_version: 0.9.0
 stolon_unarchive_prefix: /opt
 stolon_store_backend: etcd
 stolon_cluster_name: stolon-cluster
 etcd_cluster_group_name: etcd
 stolon_proxy_user: stolon_p
 stolon_proxy_port: 5432
+etcd_client_port: 2379
